@@ -7,11 +7,48 @@
 
 import Testing
 @testable import DynamicLanguage
+import SnapshotTesting
+import SwiftUI
 
+@MainActor
+@Suite("Snapshot tests")
 struct DynamicLanguageTests {
 
-    @Test func example() async throws {
-        // Write your test here and use APIs like `#expect(...)` to check expected conditions.
-    }
+    let record = true
 
+    @Test func testContentViewInEnglish() {
+            let localizationManager = LocalizationManager()
+            localizationManager.locale = Locale(identifier: "en")
+            
+            let contentView = ContentView()
+                .environmentObject(localizationManager)
+                .frame(width: 300, height: 200)
+            
+            let viewController = UIHostingController(rootView: contentView)
+            
+            assertSnapshot(
+                of: viewController,
+                as: .image(on: .iPhoneSe),
+                named: "ContentView-English",
+                record: record
+            )
+        }
+
+    @Test  func testContentViewInSpanish() {
+            let localizationManager = LocalizationManager()
+            localizationManager.locale = Locale(identifier: "es")
+            
+            let contentView = ContentView()
+                .environmentObject(localizationManager)
+                .frame(width: 300, height: 200)
+            
+            let viewController = UIHostingController(rootView: contentView)
+            
+            assertSnapshot(
+                of: viewController,
+                as: .image(on: .iPhoneSe),
+                named: "ContentView-Spanish",
+                record: record
+            )
+        }
 }
