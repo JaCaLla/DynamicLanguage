@@ -3,7 +3,7 @@ Sample iOS project that shows a sample app changes language view on the fly, it 
 
 
 ## Screenshots - ISP principle in Swift
-<img src="media/review.jpg" alt="Playground on action" width="300">
+<img src="media/review.gif" alt="Playground on action" width="300">
 
 ## Requirements
 
